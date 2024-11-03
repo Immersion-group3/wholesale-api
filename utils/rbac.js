@@ -1,14 +1,24 @@
 export const permissions = [
     {
+        role: "client",
+        actions: [
+            "get_profile",
+            "update_profile",
+            "get_product_by_id",
+            "get_products"
+        ]
+    },
+    
+    {
         role: "vendor",
         actions: [
             "get_profile",
             "update_profile",
-            "add_ads",
-            "update_ads",
-            "delete_ads",
-            "get_ads",
-            "get_ad"
+            "add_product",
+            "update_product",
+            "get_product_by_id",
+            "get_products",
+            "delete_product"
         ]
     }
 ]
