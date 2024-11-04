@@ -10,6 +10,7 @@ const orderSchema = new Schema(
       type: String,
       default: "in preparation",
       enum: ["in preparation", "in transit", "delivered"],
+      role:
     },
   },
   {
