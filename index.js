@@ -1,4 +1,5 @@
 import express from "express";
+import orderRouter from "./routes/vendor.order.js";
 
 
 
@@ -17,7 +18,7 @@ const app = express();
 
 
 // Use routes
-
+app.use(orderRouter)
 
 
 // Listen for incoming requests
