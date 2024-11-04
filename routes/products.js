@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addProductCatalogue, getAllCatalogProducts, getCatalogProductById,updateCatalogProductById,deleteCatalogProductById,filterProducts,paginateProducts } from "../controllers/products";
+import { addProductCatalogue, getAllCatalogProducts, getCatalogProductById,updateCatalogProductById,deleteCatalogProductById,filterProducts,paginateProducts, searchProducts } from "../controllers/products.js";
 import { catalogueImageUpload } from "../middlewares/upload.js";
 
 // create a router 
