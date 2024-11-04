@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import clientRouter from "./routes/client.js";
+import catalogueRouter from "./routes/products.js";
 
 
 
@@ -27,6 +28,7 @@ app.use(cors());
 
 // Use routes
 app.use(clientRouter)
+app.use(catalogueRouter)
 
 
 
