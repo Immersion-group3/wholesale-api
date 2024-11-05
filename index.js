@@ -26,7 +26,7 @@ app.use(cors());
 
 
 // Use routes
-app.use(clientRouter)
+
 
 
 
