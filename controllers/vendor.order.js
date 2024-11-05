@@ -26,7 +26,7 @@ export const addOrder = async (req, res) => {
       ...value,
       user: req.auth.id,
     });
-    await order+.save();
+    await order.save();
     res.status(201).json(order);
   } catch (error) {
     res.status(422).json({ message: "Failed to add order", error });
