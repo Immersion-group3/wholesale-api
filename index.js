@@ -11,6 +11,7 @@ import orderRouter from "./routes/order.js";
 
 
 
+
 // Connect to database
 await mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("Database connected successfully"))
@@ -29,7 +30,10 @@ app.use(cors());
 
 
 // Use routes
+
+
 app.use(clientRouter, catalogueRouter, cartRouter, orderRouter);
+
 
 
 
