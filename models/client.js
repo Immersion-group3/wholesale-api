@@ -16,17 +16,17 @@ const clientSchema = new Schema({
   }
 );
 
-// Add a virtual field for confirmPassword
-clientSchema.virtual("confirmPassword").set(function (value) {
-  this._confirmPassword = value;
-});
-// Custom validation for password confirmation
-clientSchema.pre("save", function (next) {
-  if (this.password === this._confirmPassword) {
-    return next(new Error("Passwords do not match"));
-  }
-  next();
-});
+// // Add a virtual field for confirmPassword
+// clientSchema.virtual("confirmPassword").set(function (value) {
+//   this._confirmPassword = value;
+// });
+// // Custom validation for password confirmation
+// clientSchema.pre("save", function (next) {
+//   if (this.password === this._confirmPassword) {
+//     return next(new Error("Passwords do not match"));
+//   }
+//   next();
+// });
 
 // Plugin for converting MongoDB data to JSON
 clientSchema.plugin(toJSON);
