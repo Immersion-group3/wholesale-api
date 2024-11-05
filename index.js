@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import clientRouter from "./routes/client.js";
-import orderRouter from "./routes/vendor.order.js";
+
 
 
 
@@ -26,7 +26,7 @@ app.use(cors());
 
 
 // Use routes
-app.use(clientRouter, orderRouter)
+app.use(clientRouter)
 
 
 
