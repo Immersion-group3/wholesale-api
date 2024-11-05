@@ -15,7 +15,7 @@ export const addToCart = async (req, res, next) => {
     }
 
     // Check if the product is already in the cart
-    const itemIndex = cart.items.findIndex(item => item.product.toString() === productId);
+    const itemIndex = cart.items.findIndex(item => item?.product?.toString() === productId);
     if (itemIndex > -1) {
       // Update quantity if item already exists in cart
       cart.items[itemIndex].quantity += quantity;
@@ -26,7 +26,7 @@ export const addToCart = async (req, res, next) => {
 
     // Save the updated cart
     const updatedCart = await cart.save();
-    res.status(200).json(updatedCart);
+    res.status(200).json("Added to Cart!");
 
   } catch (error) {
     next(error);
