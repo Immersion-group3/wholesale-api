@@ -26,7 +26,7 @@ export const addToCart = async (req, res, next) => {
 
     // Save the updated cart
     const updatedCart = await cart.save();
-    res.status(200).json(updatedCart);
+    res.status(200).json("Added to Cart!");
 
   } catch (error) {
     next(error);
