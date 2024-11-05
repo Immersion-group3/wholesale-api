@@ -6,7 +6,7 @@ const cartItemSchema = new Schema({
 });
 
 const cartSchema = new Schema({
-  user: { type: Types.ObjectId, ref: "User", required: true },
+  client: { type: Types.ObjectId, ref: "Client", required: true },
   items: [cartItemSchema],
   status: { type: String, default: "Active" },
   updatedAt: { type: Date, default: Date.now },
