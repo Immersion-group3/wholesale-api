@@ -1,11 +1,11 @@
 import Joi from "joi";
 
 export const signupClientValidator = Joi.object({
-    businessName: Joi.string(),
+    // businessName: Joi.string(),
     firstName: Joi.string().required(),
     lastName: Joi.string().required(),
     email: Joi.string().email().required(),
-    mobile: Joi.string().required(),
+    // mobile: Joi.string().required(),
     password: Joi.string().required(),
     // confirmPassword: Joi.any().valid(Joi.ref('password')).required().messages({
         // 'any.only': 'Passwords do not match'

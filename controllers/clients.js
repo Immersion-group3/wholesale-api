@@ -31,7 +31,7 @@ export const signupClient = async (req, res, next) => {
             text: "Hello ${value.email},\n\nThank you for signing up! We're excited to have you on board.\n\nBest regards,\nYour Company Team"
         })
         // Reponse to request
-        res.json("Client signed up successfully!");
+        res.json("Signed up successfully!");
     } catch (error) {
         next(error);
     }
@@ -60,7 +60,7 @@ export const signinClient = async (req, res, next) => {
             { id: client.id }, process.env.JWT_PRIVATE_KEY, { expiresIn: "1h" }
         );
         // respond to resquest
-        res.json({ message: "Client sign in!", accessToken: token })
+        res.json({ message: "Sign in Successfully!", accessToken: token })
 
     } catch (error) {
         next(error);

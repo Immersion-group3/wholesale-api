@@ -2,12 +2,12 @@ import { Schema, model } from "mongoose";
 import { toJSON } from "@reis/mongoose-to-json";
 
 const clientSchema = new Schema({
-  businessName: { type: String, required: false },
+  // businessName: { type: String, required: false },
   firstName: {
     type: String, required: true,},
   lastName: { type: String, requiered: true },
   email: { type: String, required: true, unique: false },
-  mobile: { type: String, required: true },
+  // mobile: { type: String, required: true },
   password: { type: String, required: true, minlength: 6 },
   role: { type: String, default: "client", enum: ["client", "vendor"] },
 },
