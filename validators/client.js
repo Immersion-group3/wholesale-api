@@ -10,7 +10,7 @@ export const signupClientValidator = Joi.object({
     // }),
     // role: Joi.string().valid("client", "vendor").default("client")
     // confirmPassword: Joi.string().required,
-    // role: Joi.string().valid("client", "vendor")
+    role: Joi.string().valid("client", "vendor")
 
 })
 
