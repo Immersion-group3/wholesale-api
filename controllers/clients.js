@@ -31,7 +31,7 @@ export const signupClient = async (req, res, next) => {
             text: "Hello ${value.email},\n\nThank you for signing up! We're excited to have you on board.\n\nBest regards,\nYour Company Team"
         })
         // Reponse to request
-        res.json("Client signed up successfully!");
+        res.json("Signed up successfully!");
     } catch (error) {
         next(error);
     }
@@ -57,10 +57,10 @@ export const signinClient = async (req, res, next) => {
         }
         // sign a token for user
         const token = jwt.sign(
-            { id: client.id }, process.env.JWT_PRIVATE_KEY, { expiresIn: "1h" }
+            { id: client.id }, process.env.JWT_PRIVATE_KEY, { expiresIn: "12h" }
         );
         // respond to resquest
-        res.json({ message: "Client sign in!", accessToken: token })
+        res.json({ message: "Sign in Successfully!", accessToken: token })
 
     } catch (error) {
         next(error);
@@ -71,10 +71,10 @@ export const signinClient = async (req, res, next) => {
 export const forgotPassword = async (req, res, next) => {
     try {
         // Validate user input
-        const { error, value } = signupClientValidator.validate(req.body);
-        if (error) {
-            return res.status(422).json(error);
-        }
+        // const { error, value } = signupClientValidator.validate(req.body);
+        // if (error) {
+        //     return res.status(422).json(error);
+        // }
         // Find one user with identifier
         const { email } = req.body;
         const client = await ClientModel.findOne({ email });
@@ -85,12 +85,12 @@ export const forgotPassword = async (req, res, next) => {
         client.resetPasswordExpire = Date.now() + 10 * 60 * 1000
         await client.save();
 
-        const resetUrl = "http://localhost:6060/reset-password/${resetToken}";
+        const resetUrl = "https://wholesale-api-knrp.onrender.com/reset-password/${resetToken}";
 
         await mailTransport.sendMail({
-            to: value.email,
+            to: req.body.email,
             subject: "Password Reset Request",
-            text: "Please reset your password using the link: ${resetUrl}"
+            text: `Please reset your password using the link: ${resetUrl}`
         })
         return res.status(200).json("Password reset link sent successfully");
     } catch (error) {

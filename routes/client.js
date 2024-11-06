@@ -10,9 +10,7 @@ const clientRouter = Router();
 
 clientRouter.post("/clients/signup", signupClient);
 
-clientRouter.post("/clients/signin",
-    signinClient
-);
+clientRouter.post("/clients/signin", signinClient);
 
 clientRouter.post("/clients/forgot-password", forgotPassword);
 
@@ -22,7 +20,7 @@ clientRouter.get("/clients/me/", isAuthenticated, hasPermission("get_profile"), 
 
 // clientRouter.post("/client/logout", logoutClient);
 
-clientRouter.patch("/clients/me", updateProfile);
+clientRouter.patch("/clients/me", isAuthenticated, updateProfile);
 
 // export Router
 export default clientRouter;
