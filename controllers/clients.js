@@ -80,6 +80,7 @@ export const forgotPassword = async (req, res, next) => {
         const client = await ClientModel.findOne({ email });
         if (!client) return res.status(404).json("User not found")
 
+        
         const resetToken = crypto.randomBytes(32).toString("hex");
         client.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
         client.resetPasswordExpire = Date.now() + 10 * 60 * 1000
