@@ -57,7 +57,7 @@ export const signinClient = async (req, res, next) => {
         }
         // sign a token for user
         const token = jwt.sign(
-            { id: client.id }, process.env.JWT_PRIVATE_KEY, { expiresIn: "1h" }
+            { id: client.id }, process.env.JWT_PRIVATE_KEY, { expiresIn: "12h" }
         );
         // respond to resquest
         res.json({ message: "Sign in Successfully!", accessToken: token })
@@ -85,7 +85,7 @@ export const forgotPassword = async (req, res, next) => {
         client.resetPasswordExpire = Date.now() + 10 * 60 * 1000
         await client.save();
 
-        const resetUrl = "http://localhost:6060/reset-password/${resetToken}";
+        const resetUrl = "https://wholesale-api-knrp.onrender.com/reset-password/${resetToken}";
 
         await mailTransport.sendMail({
             to: value.email,
