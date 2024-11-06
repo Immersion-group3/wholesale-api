@@ -12,9 +12,9 @@ clientRouter.post("/clients/signup", signupClient);
 
 clientRouter.post("/clients/signin", signinClient);
 
-clientRouter.post("/clients/forgot-password", isAuthenticated, forgotPassword);
+clientRouter.post("/clients/forgot-password", forgotPassword);
 
-clientRouter.patch("/clients/reset-password/:token", isAuthenticated, hasPermission, resetPassword)
+clientRouter.patch("/clients/reset-password/:token", resetPassword)
 
 clientRouter.get("/clients/me/", isAuthenticated, hasPermission("get_profile"), getProfile)
 

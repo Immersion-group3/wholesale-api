@@ -71,10 +71,10 @@ export const signinClient = async (req, res, next) => {
 export const forgotPassword = async (req, res, next) => {
     try {
         // Validate user input
-        const { error, value } = signupClientValidator.validate(req.body);
-        if (error) {
-            return res.status(422).json(error);
-        }
+        // const { error, value } = signupClientValidator.validate(req.body);
+        // if (error) {
+        //     return res.status(422).json(error);
+        // }
         // Find one user with identifier
         const { email } = req.body;
         const client = await ClientModel.findOne({ email });
@@ -88,9 +88,9 @@ export const forgotPassword = async (req, res, next) => {
         const resetUrl = "https://wholesale-api-knrp.onrender.com/reset-password/${resetToken}";
 
         await mailTransport.sendMail({
-            to: value.email,
+            to: req.body.email,
             subject: "Password Reset Request",
-            text: "Please reset your password using the link: ${resetUrl}"
+            text: `Please reset your password using the link: ${resetUrl}`
         })
         return res.status(200).json("Password reset link sent successfully");
     } catch (error) {
