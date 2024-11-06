@@ -85,7 +85,7 @@ export const forgotPassword = async (req, res, next) => {
         client.resetPasswordExpire = Date.now() + 10 * 60 * 1000
         await client.save();
 
-        const resetUrl = "https://wholesale-api-knrp.onrender.com/reset-password/${resetToken}";
+        const resetUrl = "http://localhost:5173/resetpassword";
 
         await mailTransport.sendMail({
             to: req.body.email,
