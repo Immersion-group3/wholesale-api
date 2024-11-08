@@ -80,12 +80,13 @@ export const forgotPassword = async (req, res, next) => {
         const client = await ClientModel.findOne({ email });
         if (!client) return res.status(404).json("User not found")
 
+        
         const resetToken = crypto.randomBytes(32).toString("hex");
         client.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
         client.resetPasswordExpire = Date.now() + 10 * 60 * 1000
         await client.save();
 
-        const resetUrl = "https://wholesale-api-knrp.onrender.com/reset-password/${resetToken}";
+        const resetUrl = "http://localhost:5173/resetpassword";
 
         await mailTransport.sendMail({
             to: req.body.email,
