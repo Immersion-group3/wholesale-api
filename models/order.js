@@ -1,11 +1,11 @@
 import { Schema, Types, model } from "mongoose";
 
 const orderSchema = new Schema({
-  client: { type: Types.ObjectId, ref: "Client", required: true },
-  cart_id: { type: Types.ObjectId, ref: "Cart", required: true },
+  client: { type: Types.ObjectId, ref: "client", required: true },
+  cart_id: { type: Types.ObjectId, ref: "cart", required: true },
   items: [
     {
-      product: { type: Types.ObjectId, ref: "Product", required: true },
+      product: { type: Types.ObjectId, ref: "product", required: true },
       quantity: { type: Number, required: true },
     },
   ],
