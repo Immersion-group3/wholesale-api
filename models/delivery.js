@@ -4,11 +4,11 @@ import { toJSON } from "@reis/mongoose-to-json";
 const deliverySchema = new Schema(
   {
     orderId: { type: Types.ObjectId, ref: "Order", required: true },
-    deliveryPersonId: {
-      type: Types.ObjectId,
-      ref: "DeliveryPerson",
-      required: true,
-    },
+    // deliveryPersonId: {
+    //   type: Types.ObjectId,
+    //   ref: "DeliveryPerson",
+    //   required: true,
+    // },
     status: {
       type: String,
       enum: ["in preparation", "in-transit", "completed", "failed"],
