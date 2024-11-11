@@ -11,7 +11,7 @@ export const assignDeliveryPerson = async (req, res, next) => {
 
     const delivery = new DeliveryModel({
       orderId,
-      deliveryPersonId,
+      //deliveryPersonId,
       status: "assigned",
       collectPayment: order.paymentMethod === "pay_on_delivery",
     });
@@ -19,7 +19,7 @@ export const assignDeliveryPerson = async (req, res, next) => {
     res.status(201).json(delivery);
   } catch (error) {
     res
-      .status(500)
+      .status(422)
       .json({ message: "Failed to assign delivery person", error });
   }
 };
