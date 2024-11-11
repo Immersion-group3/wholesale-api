@@ -9,6 +9,7 @@ const deliverySchema = new Schema(
     //   ref: "DeliveryPerson",
     //   required: true,
     // },
+
     status: {
       type: String,
       enum: ["in preparation", "in-transit", "completed", "failed"],
