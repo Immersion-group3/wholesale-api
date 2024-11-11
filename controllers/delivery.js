@@ -1,4 +1,4 @@
-import { DeliveryModel } from "../models/delivery";
+import { DeliveryModel } from "../models/delivery.js";
 
 export const assignDeliveryPerson = async (req, res, next) => {
   try {
