@@ -16,3 +16,4 @@ deliveryRouter.patch("/delivery/assign", updateDeliveryStatus);
 
 deliveryRouter.get("/delivery/assign", trackDelivery);
 
+export default deliveryRouter;
