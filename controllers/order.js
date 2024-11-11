@@ -9,7 +9,7 @@ export const checkout = async (req, res, next) => {
   try {
     // Find the active cart for the client
     const cart = await CartModel.findOne({ client: clientId, status: "Active" })
-      .populate("items.product")
+      .populate("items")
       .session(session);
 
     if (!cart || cart.items.length === 0) {
@@ -65,15 +65,16 @@ export const createOrder = async (req, res, next) => {
   const clientId = req.client.id;
   try {
     // Find the active cart for the client
-    const cart = await CartModel.findOne({
-      client: clientId,
-      status: "Active",
-    }).populate("items.product");
+    const cart = await CartModel.findOne({ client: clientId, status: "Active" }).populate('items');
     if (!cart || cart.items.length === 0) {
       return res.status(400).json({ message: "Cart is empty or not found." });
     }
     // Calculate total amount
     const totalAmount = cart.items.reduce((total, item) => {
+      if (!item.product || typeof item.prouct.price !== 'number') {
+        console.warn(`Product data is incomplete for item: ${item}`);
+        return total;
+      }
       return total + item.product.price * item.quantity;
     }, 0);
     // Create a new order
