@@ -35,7 +35,7 @@ export const addToCart = async (req, res, next) => {
 // 
 export const getAllCarts = async (req, res, next) => {
   try {
-    const carts = await CartModel.find().populate('items.product');
+    const carts = await CartModel.find().populate('items');
     res.status(200).json(carts);
   } catch (error) {
     console.error("Error fetching all carts:", error);
