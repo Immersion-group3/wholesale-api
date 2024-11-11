@@ -4,21 +4,27 @@ import mongoose from 'mongoose';
 
 export const checkout = async (req, res, next) => {
   const clientId = req.client.id;
-
   const session = await mongoose.startSession();
   session.startTransaction();
-
   try {
+    // Find the active cart for the client
     const cart = await CartModel.findOne({ client: clientId, status: "Active" })
       .populate('items.product')
       .session(session);
 
     if (!cart || cart.items.length === 0) {
+      await session.abortTransaction();
+      session.endSession();
       return res.status(400).json({ message: "Cart is empty or does not exist." });
     }
-
-    const totalAmount = cart.items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-
+    // Calculate total amount
+    const totalAmount = cart.items.reduce((acc, item) => {
+      if (!item.product || !item.product.price) {
+        throw new Error("Product information is incomplete.");
+      }
+      return acc + item.product.price * item.quantity;
+    }, 0);
+    // Create a new order
     const newOrder = new OrderModel({
       client: clientId,
       cart_id: cart._id,
@@ -26,10 +32,13 @@ export const checkout = async (req, res, next) => {
         product: item.product._id,
         quantity: item.quantity
       })),
-      totalAmount
+      totalAmount,
+      status: "In preparation", // Initial status
+      deliveryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // Example: 7 days from now
     });
 
     const savedOrder = await newOrder.save({ session });
+    // Update cart status
     cart.status = "Checked Out";
     await cart.save({ session });
 
@@ -43,10 +52,44 @@ export const checkout = async (req, res, next) => {
   } catch (error) {
     await session.abortTransaction();
     session.endSession();
-    next(error);
+    console.error("Error during checkout:", error);
+    res.status(500).json({ message: "Checkout failed. Please try again later." });
   }
 };
 
+export const createOrder = async (req, res, next) => {
+  const clientId = req.client.id;
+  try {
+    // Find the active cart for the client
+    const cart = await CartModel.findOne({ client: clientId, status: "Active" }).populate('items.product');
+    if (!cart || cart.items.length === 0) {
+      return res.status(400).json({ message: "Cart is empty or not found." });
+    }
+    // Calculate total amount
+    const totalAmount = cart.items.reduce((total, item) => {
+      return total + item.product.price * item.quantity;
+    }, 0);
+    // Create a new order
+    const order = new OrderModel({
+      client: clientId,
+      cart_id: cart._id,
+      items: cart.items,
+      totalAmount,
+      status: "In preparation",
+      deliveryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // Example: 7 days from now
+    });
+    // Save the order
+    const savedOrder = await order.save();
+    // Clear the cart
+    cart.items = [];
+    await cart.save();
+
+    res.status(201).json(savedOrder);
+  } catch (error) {
+    console.error("Error creating order:", error);
+    next(error);
+  }
+};
 
 // Get all orders for the authenticated client
 export const getClientOrders = async (req, res, next) => {
