@@ -5,8 +5,8 @@ import clientRouter from "./routes/client.js";
 import catalogueRouter from "./routes/products.js";
 import cartRouter from "./routes/cart.js";
 import orderRouter from "./routes/order.js";
-
-
+import deliveryRouter from "./routes/delivery.js"; 
+import manageRouter from "./routes/manage.js";
 
 
 
@@ -32,7 +32,7 @@ app.use(cors());
 // Use routes
 
 
-app.use(clientRouter, catalogueRouter, cartRouter, orderRouter);
+app.use(clientRouter, catalogueRouter, cartRouter, orderRouter, deliveryRouter, manageRouter);
 
 
 

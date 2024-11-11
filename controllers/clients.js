@@ -80,7 +80,7 @@ export const forgotPassword = async (req, res, next) => {
         const client = await ClientModel.findOne({ email });
         if (!client) return res.status(404).json("User not found")
 
-        
+
         const resetToken = crypto.randomBytes(32).toString("hex");
         client.resetPasswordToken = crypto.createHash("sha256").update(resetToken).digest("hex");
         client.resetPasswordExpire = Date.now() + 10 * 60 * 1000
@@ -102,25 +102,25 @@ export const forgotPassword = async (req, res, next) => {
 
 export const resetPassword = async (req, res) => {
     try {
-        
-    const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
-    const client = await ClientModel.findOne({
-        resetPasswordToken,
-        resetPasswordExpire: { $gt: Date.now() }
-    });
-    if (!client) return res.status(400).json("Invalid or expired token");
 
-    client.password = req.body.password;
-    client.resetPasswordToken = undefined;
-    client.resetPasswordExpire = undefined;
-    await client.save();
-    return res.status(200).json("Password reset successful");
-        
+        const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+        const client = await ClientModel.findOne({
+            resetPasswordToken,
+            resetPasswordExpire: { $gt: Date.now() }
+        });
+        if (!client) return res.status(400).json("Invalid or expired token");
+
+        client.password = req.body.password;
+        client.resetPasswordToken = undefined;
+        client.resetPasswordExpire = undefined;
+        await client.save();
+        return res.status(200).json("Password reset successful");
+
     } catch (error) {
         next(error)
-        
+
     }
-} 
+}
 
 export const getProfile = async (req, res, next) => {
     try {
