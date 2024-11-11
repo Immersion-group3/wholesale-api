@@ -9,7 +9,7 @@ export const checkout = async (req, res, next) => {
   try {
     // Find the active cart for the client
     const cart = await CartModel.findOne({ client: clientId, status: "Active" })
-      .populate("items.product")
+      .populate("items")
       .session(session);
 
     if (!cart || cart.items.length === 0) {
