@@ -12,8 +12,8 @@ const deliverySchema = new Schema(
 
     status: {
       type: String,
-      enum: ["in preparation", "in-transit", "completed", "failed"],
-      default: "in preparation",
+      enum: ["in-preparation", "in-transit", "completed", "failed"],
+      default: "in-preparation",
     },
     assignedAt: { type: Date },
     completedAt: { type: Date },
