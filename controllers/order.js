@@ -85,7 +85,7 @@ export const createOrder = async (req, res, next) => {
       totalAmount,
       status: "In preparation",
       deliveryDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Example: 7 days from now
-      paymentStatus: paymentMethod === "pay_on_delivery" ? "pending" : "unpaid", //added by irene
+      paymentMethod: "pay_on_delivery", //added by irene
     });
     // Save the order
     const savedOrder = await order.save();

@@ -2,20 +2,20 @@ import { Schema, Types, model } from "mongoose";
 
 const orderSchema = new Schema(
   {
-    client: { type: Types.ObjectId, ref: "client", required: true },
-    cart_id: { type: Types.ObjectId, ref: "cart", required: true },
+    client: { type: Types.ObjectId, ref: "client", required: false },
+    cart_id: { type: Types.ObjectId, ref: "cart", required: false },
     items: [
       {
-        product: { type: Types.ObjectId, ref: "product", required: true },
-        quantity: { type: Number, required: true },
+        product: { type: String, ref: "product", required: false },
+        quantity: { type: Number, required: false },
       },
     ],
-    totalAmount: { type: Number, required: true },
+    totalAmount: { type: Number, required: false },
     status: {
       type: String,
       enum: ["In preparation", "In transit", "Delivered"],
     },
-    vendor: { type: Types.ObjectId, ref: "Vendor", required: true },
+    vendor: { type: String, ref: "Vendor", required: false },
     deliveryDate: { type: Date, required: true },
     //added by irene
     paymentMethod: {

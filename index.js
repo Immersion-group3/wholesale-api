@@ -2,11 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import clientRouter from "./routes/client.js";
-import catalogueRouter from "./routes/products.js";
 import cartRouter from "./routes/cart.js";
 import orderRouter from "./routes/order.js";
 import deliveryRouter from "./routes/delivery.js"; 
 import manageRouter from "./routes/manage.js";
+import catalogueRouter from "./routes/products.js";
 
 
 
@@ -33,10 +33,6 @@ app.use(cors());
 
 
 app.use(clientRouter, catalogueRouter, cartRouter, orderRouter, deliveryRouter, manageRouter);
-
-
-
-
 
 // Listen for incoming requests
 app.listen(6060, () => {
