@@ -14,7 +14,7 @@ export const addProductCatalogue = async (req, res, next) => {
     // Write advert to database
     await ProductModel.create({
       ...value,
-      client: req.id
+      // client: req.auth.id
     });
     // Respond to request
     res.status(201).json("Product was added!");
@@ -73,11 +73,11 @@ export const updateCatalogProductById = async (req, res, next) => {
     if (error) {
       return res.status(422).json(error);
     }
-    console.log(req.params, req.auth);
+    console.log(req.params,);
     const product = await ProductModel.findOneAndUpdate(
       {
         _id: req.params.id,
-        user: req.auth.id
+        // user: req.auth.id
       },
       value, { new: true });
     if (!product) {
@@ -94,7 +94,7 @@ export const deleteCatalogProductById = async (req, res, next) => {
     const product = await ProductModel.findOneAndDelete(
       {
         _id: req.params.id,
-        user: req.auth.id
+        // user: req.auth.id
       }
     );
     if (!product) {
