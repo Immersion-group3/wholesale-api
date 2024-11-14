@@ -15,7 +15,6 @@ catalogueRouter.get("/products", getAllCatalogProducts);
 
 catalogueRouter.get("/products/:id", getCatalogProductById);
 
-
 catalogueRouter.get("/products/count", countCatalogProducts)
 
 catalogueRouter.patch("/products/:id", updateCatalogProductById);

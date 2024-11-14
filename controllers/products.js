@@ -14,7 +14,7 @@ export const addProductCatalogue = async (req, res, next) => {
     // Write advert to database
     await ProductModel.create({
       ...value,
-      client: req.auth.id
+      client: req.id
     });
     // Respond to request
     res.status(201).json("Product was added!");
