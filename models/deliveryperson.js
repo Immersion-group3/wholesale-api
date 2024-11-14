@@ -14,4 +14,4 @@ const deliveryPersonSchema = new Schema(
 
 deliveryPersonSchema.plugin(toJSON)
 
-export const deliveryPersonModel = ("deliveryPerson", deliveryPersonSchema);
+export const DeliveryPersonModel = ("deliveryPerson", deliveryPersonSchema);
