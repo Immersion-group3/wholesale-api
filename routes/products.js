@@ -9,7 +9,7 @@ const catalogueRouter = Router();
 
 //define routes
 
-catalogueRouter.post("/products", isAuthenticated, wholesaleIconUpload.single("icon"), addProductCatalogue);
+catalogueRouter.post("/products", wholesaleIconUpload.single("icon"), addProductCatalogue);
 
 catalogueRouter.get("/products", getAllCatalogProducts);
 
