@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { forgotPassword, getProfile, resetPassword, signinClient, signupClient, updateProfile } from "../controllers/clients.js";
 import { hasPermission, isAuthenticated } from "../middlewares/auth.js";
+import { clientAvatarUpload } from "../middlewares/upload.js";
 
 
 // Create a router
@@ -20,7 +21,7 @@ clientRouter.get("/clients/me/", isAuthenticated, hasPermission("get_profile"), 
 
 // clientRouter.post("/client/logout", logoutClient);
 
-clientRouter.patch("/clients/me", isAuthenticated, updateProfile);
+clientRouter.patch("/clients/me", isAuthenticated, hasPermission("update_profile"), clientAvatarUpload.single("avatar"), updateProfile);
 
 // export Router
 export default clientRouter;

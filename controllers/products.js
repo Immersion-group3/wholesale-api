@@ -14,7 +14,7 @@ export const addProductCatalogue = async (req, res, next) => {
     // Write advert to database
     await ProductModel.create({
       ...value,
-      // client: req.auth.id
+      client: req.auth.id
     });
     // Respond to request
     res.status(201).json("Product was added!");
@@ -56,7 +56,7 @@ export const countCatalogProducts = async (req, res, next) => {
 export const getCatalogProductById = async (req, res, next) => {
   try {
     // Fetch a book for database
-    const product = await ProductModel.findById(req.params.id).populate("product");
+    const product = await ProductModel.findById(req.params.id);
     // Return Response
     res.status(200).json(product);
   } catch (error) {
@@ -66,22 +66,27 @@ export const getCatalogProductById = async (req, res, next) => {
 
 export const updateCatalogProductById = async (req, res, next) => {
   try {
+    if (!req.auth || !req.auth.id) {
+      return res.status(403).json({ error: 'Unauthorized access' });
+    }
+
     const { error, value } = updateProductValidator.validate({
       ...req.body,
-      media: req.file?.filename
+      icon: req.file?.filename
     });
     if (error) {
       return res.status(422).json(error);
     }
-    console.log(req.params,);
+    console.log(req.params,
+      req.auth);
     const product = await ProductModel.findOneAndUpdate(
       {
         _id: req.params.id,
-        // user: req.auth.id
+        user: req.auth.id
       },
       value, { new: true });
     if (!product) {
-      return res.status(404).json("Advert not found!");
+      return res.status(404).json("Product not found!");
     }
     res.status(200).json("Poduct updated!");
   } catch (error) {
@@ -94,7 +99,7 @@ export const deleteCatalogProductById = async (req, res, next) => {
     const product = await ProductModel.findOneAndDelete(
       {
         _id: req.params.id,
-        // user: req.auth.id
+        user: req.auth.id
       }
     );
     if (!product) {

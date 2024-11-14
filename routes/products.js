@@ -9,7 +9,7 @@ const catalogueRouter = Router();
 
 //define routes
 
-catalogueRouter.post("/products", wholesaleIconUpload.single("icon"), addProductCatalogue);
+catalogueRouter.post("/products", isAuthenticated, hasPermission("add_product"), wholesaleIconUpload.single("icon"), addProductCatalogue);
 
 catalogueRouter.get("/products", getAllCatalogProducts);
 
@@ -17,7 +17,7 @@ catalogueRouter.get("/products/:id", getCatalogProductById);
 
 catalogueRouter.get("/products/count", countCatalogProducts)
 
-catalogueRouter.patch("/products/:id", updateCatalogProductById);
+catalogueRouter.patch("/products/:id", isAuthenticated, wholesaleIconUpload.single("icon"), updateCatalogProductById)
 
 catalogueRouter.delete("/products/:id", deleteCatalogProductById);
 
