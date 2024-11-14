@@ -13,6 +13,7 @@ export const updateProductValidator = Joi.object({
     title: Joi.string(),
     icon: Joi.string(),
     description: Joi.string(),
+    
     price: Joi.string(),
 
 });
