@@ -7,6 +7,7 @@ import orderRouter from "./routes/order.js";
 import deliveryRouter from "./routes/delivery.js"; 
 import manageRouter from "./routes/manage.js";
 import catalogueRouter from "./routes/products.js";
+import subcrebeRouter from "./routes/subscribe.js";
 
 
 
@@ -32,7 +33,13 @@ app.use(cors());
 // Use routes
 
 
-app.use(clientRouter, catalogueRouter, cartRouter, orderRouter, deliveryRouter, manageRouter);
+app.use(clientRouter,);
+app.use(catalogueRouter);
+app.use(cartRouter);
+app.use(orderRouter);
+app.use(manageRouter);
+app.use(deliveryRouter);
+app.use(subcrebeRouter)
 
 // Listen for incoming requests
 app.listen(6060, () => {
