@@ -77,8 +77,8 @@ export const updateCatalogProductById = async (req, res, next) => {
     if (error) {
       return res.status(422).json(error);
     }
-    console.log(req.params.id,
-      req.auth);
+    console.log(req.params.id)
+      // req.auth);
     const product = await ProductModel.findOneAndUpdate(
       {
         _id: req.params.id,
