@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { isAuthenticated, hasPermission } from "../middlewares/auth.js";
-import { addProductCatalogue, countCatalogProducts, deleteCatalogProductById, filterProducts, getAllCatalogProducts, getCatalogProductById, paginateProducts, updateCatalogProductById } from "../controllers/products.js";
+import { addProductCatalogue, countCatalogProducts, deleteCatalogProductById, filterProducts, getAllCatalogProducts, getCatalogProductById, paginateProducts, updateCatalogProductById, addDeliveryDateToProducts, getProductDeliveryDates } from "../controllers/products.js";
 import { wholesaleIconUpload } from "../middlewares/upload.js";
 
 // create a router 
@@ -24,6 +24,12 @@ catalogueRouter.delete("/products/:id", deleteCatalogProductById);
 catalogueRouter.get('/products/filter', filterProducts);
 
 catalogueRouter.get('/products/paginate', paginateProducts);
+
+catalogueRouter.post('/add-delivery-date', addDeliveryDateToProducts);
+
+catalogueRouter.get("/products/delivery-dates/:id", getProductDeliveryDates);
+
+
 
 // productRouter.get("/products/count", countProducts);
 
