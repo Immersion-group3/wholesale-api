@@ -81,7 +81,7 @@ export const updateCatalogProductById = async (req, res, next) => {
       // req.auth);
     const product = await ProductModel.findOneAndUpdate(
       {
-        _id: req.params.id,
+        _id: req.params.id
         // user: req.auth.id
       },
       value, { new: true });
@@ -98,7 +98,7 @@ export const deleteCatalogProductById = async (req, res, next) => {
   try {
     const product = await ProductModel.findOneAndDelete(
       {
-        _id: req.params.id,
+        _id: req.params.id
         // user: req.auth.id
       }
     );

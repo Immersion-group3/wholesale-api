@@ -6,7 +6,7 @@ export const addProductValidator = Joi.object({
     description: Joi.string().required(),
     icon: Joi.string().required(),
     availability: Joi.string().required(),
-    deliveryDate: Joi.string().required()
+    deliveryDate: Joi.date().required()
     
 });
 
