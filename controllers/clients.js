@@ -28,7 +28,7 @@ export const signupClient = async (req, res, next) => {
         await mailTransport.sendMail({
             to: value.email,
             subject: "Welcome to Our Service!",
-            text: "Hello ${value.email},\n\nThank you for signing up! We're excited to have you on board.\n\nBest regards,\nYour Company Team"
+            text: "Hello \n\nThank you for signing up! We're excited to have you on board.\n\nBest regards,\nYour Company Team"
         })
         // Reponse to request
         res.json("Signed up successfully!");
@@ -86,7 +86,7 @@ export const forgotPassword = async (req, res, next) => {
         client.resetPasswordExpire = Date.now() + 10 * 60 * 1000
         await client.save();
 
-        const resetUrl = "http://localhost:5173/resetpassword";
+        const resetUrl = "http://localhost:5173/forgotpassword";
 
         await mailTransport.sendMail({
             to: req.body.email,

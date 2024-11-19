@@ -8,6 +8,7 @@ import deliveryRouter from "./routes/delivery.js";
 import manageRouter from "./routes/manage.js";
 import catalogueRouter from "./routes/products.js";
 import subcrebeRouter from "./routes/subscribe.js";
+import accessRounter from "./routes/access.js";
 
 
 
@@ -39,7 +40,8 @@ app.use(cartRouter);
 app.use(orderRouter);
 app.use(manageRouter);
 app.use(deliveryRouter);
-app.use(subcrebeRouter)
+app.use(subcrebeRouter);
+app.use(accessRounter)
 
 // Listen for incoming requests
 app.listen(6060, () => {
