@@ -104,16 +104,13 @@ export const deleteCatalogProductById = async (req, res, next) => {
       _id: req.params.id,
       // user: req.auth.id
     });
-<<<<<<< HEAD
     // const product = await ProductModel.findOneAndDelete(
     //   {
     //     _id: req.params.id
     //     // user: req.auth.id
     //   }
     // );
-=======
-    
->>>>>>> 7bddcb965fa5dfd43280338047a9a6bc3e4935e8
+
     if (!product) {
       return res.status(404).json("Product not found!");
     }

@@ -13,7 +13,6 @@ const productSchema = new Schema({
     required: false,
   },
   deliveryDate: { type: [Date], default: [] },
-<<<<<<< HEAD
 });
     // title: { type: String, required: true },
     // price: { type: Number, required: true },
@@ -22,10 +21,6 @@ const productSchema = new Schema({
     // icon: {type: String, required: true},
     // deliveryDate: { type: Date, required: true }
 
-=======
-
-});
->>>>>>> 7bddcb965fa5dfd43280338047a9a6bc3e4935e8
 
 export const ProductModel = model("Products", productSchema);
 
