@@ -32,16 +32,20 @@ export const addToCart = async (req, res, next) => {
   }
 }
 
-// 
-export const getAllCarts = async (req, res, next) => {
+// Get all carts for a specific client
+export const getClientCart = async (req, res, next) => {
+  const clientId = req.client.id;
   try {
-    const carts = await CartModel.find().populate('items');
-    res.status(200).json(carts);
+    const cart = await CartModel.findOne({ client: clientId, status: "Active" }).populate('items.product');
+    if (!cart) {
+      return res.status(404).json({ message: "Cart not found." });
+    }
+    res.status(200).json(cart);
   } catch (error) {
-    console.error("Error fetching all carts:", error);
+    console.error("Error fetching client cart:", error);
     next(error);
   }
-};
+}
 
 // Remove a product from the cart based on its product ID
 export const removeFromCart = async (req, res, next) => {
